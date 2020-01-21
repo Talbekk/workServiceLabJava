@@ -18,14 +18,15 @@ public class Project {
     @Column(name = "duration")
     private int duration;
 
-    private List<Employee> employees;
+//    @Column(name = "employees")
+//    private List<Employee> employees;
 
     public Project(){}
 
     public Project(String name, int duration) {
         this.name = name;
         this.duration = duration;
-        this.employees = new ArrayList<>();
+//        this.employees = new ArrayList<>();
     }
 
     public long getId() {
@@ -51,12 +52,12 @@ public class Project {
     public void setDuration(int duration) {
         this.duration = duration;
     }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
+//
+//    public List<Employee> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(List<Employee> employees) {
+//        this.employees = employees;
+//    }
 }

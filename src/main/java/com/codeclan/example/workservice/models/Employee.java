@@ -2,6 +2,7 @@ package com.codeclan.example.workservice.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
@@ -20,15 +21,16 @@ public class Employee {
     @Column(name = "employee_number")
     private int employeeNumber;
 
-
-    private ArrayList<Project> projects;
+//    @Column(name = "projects")
+//    private List<Project> projects;
 
     public Employee(){}
 
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, int employeeNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.projects = new ArrayList<>();
+        this.employeeNumber = employeeNumber;
+//        this.projects = new ArrayList<>();
     }
 
     public long getId() {
@@ -63,11 +65,11 @@ public class Employee {
         this.employeeNumber = employeeNumber;
     }
 
-    public ArrayList<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(ArrayList<Project> projects) {
-        this.projects = projects;
-    }
+//    public List<Project> getProjects() {
+//        return projects;
+//    }
+//
+//    public void setProjects(ArrayList<Project> projects) {
+//        this.projects = projects;
+//    }
 }
