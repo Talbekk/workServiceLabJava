@@ -1,5 +1,7 @@
 package com.codeclan.example.workservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +20,37 @@ public class Project {
     @Column(name = "duration")
     private int duration;
 
-//    @Column(name = "employees")
-//    private List<Employee> employees;
+    @JsonIgnoreProperties("projects")
+    @ManyToMany
+    @JoinTable(
+            name = "employees_projects",
+            joinColumns = {
+                    @JoinColumn(
+                            name = "project_id",
+                            nullable = false,
+                            updatable = false
+                    )
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(
+                            name = "employee_id",
+                            nullable = false,
+                            updatable = false
+                    )
+            }
+    )
+    private List<Employee> employees;
 
     public Project(){}
 
     public Project(String name, int duration) {
         this.name = name;
         this.duration = duration;
-//        this.employees = new ArrayList<>();
+        this.employees = new ArrayList<>();
+    }
+
+    public void addEmployee(Employee employee){
+        employees.add(employee);
     }
 
     public long getId() {
@@ -52,12 +76,12 @@ public class Project {
     public void setDuration(int duration) {
         this.duration = duration;
     }
-//
-//    public List<Employee> getEmployees() {
-//        return employees;
-//    }
-//
-//    public void setEmployees(List<Employee> employees) {
-//        this.employees = employees;
-//    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
 }

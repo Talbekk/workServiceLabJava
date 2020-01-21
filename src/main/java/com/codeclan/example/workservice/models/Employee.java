@@ -28,8 +28,28 @@ public class Employee {
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-//    @Column(name = "projects")
-//    private List<Project> projects;
+    @JsonIgnoreProperties("employees")
+    @ManyToMany
+    @JoinTable(
+            name = "employees_projects",
+            joinColumns = {
+                    @JoinColumn(
+                            name = "employee_id",
+                            nullable = false,
+                            updatable = false
+                    )
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(
+                            name = "project_id",
+                            nullable = false,
+                            updatable = false
+                    )
+            }
+
+    )
+
+    private List<Project> projects;
 
     public Employee(){}
 
@@ -38,7 +58,11 @@ public class Employee {
         this.lastName = lastName;
         this.employeeNumber = employeeNumber;
         this.department = department;
-//        this.projects = new ArrayList<>();
+        this.projects = new ArrayList<>();
+    }
+
+    public void addProject(Project project){
+        projects.add(project);
     }
 
     public Department getDepartment() {
@@ -81,11 +105,11 @@ public class Employee {
         this.employeeNumber = employeeNumber;
     }
 
-//    public List<Project> getProjects() {
-//        return projects;
-//    }
-//
-//    public void setProjects(ArrayList<Project> projects) {
-//        this.projects = projects;
-//    }
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(ArrayList<Project> projects) {
+        this.projects = projects;
+    }
 }

@@ -43,8 +43,18 @@ class WorkserviceApplicationTests {
 
 	@Test
 	public void canCreateProject(){
+		Department department = new Department("World of Cheese");
+		departmentRepository.save(department);
+
+		Employee employee = new Employee("John", "Stuart", 1234, department);
+		employeeRepository.save(employee);
+
 		Project project = new Project("Making cheese", 12);
+		project.addEmployee(employee);
 		projectRepository.save(project);
+
+		employee.addProject(project);
+		employeeRepository.save(employee);
 	}
 
 }
