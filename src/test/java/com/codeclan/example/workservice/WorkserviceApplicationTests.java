@@ -34,7 +34,10 @@ class WorkserviceApplicationTests {
 
 	@Test
 	public void canCreateEmployee(){
-		Employee employee = new Employee("John", "Stuart", 1234);
+		Department department = new Department("World of Cheese");
+		departmentRepository.save(department);
+
+		Employee employee = new Employee("John", "Stuart", 1234, department);
 		employeeRepository.save(employee);
 	}
 

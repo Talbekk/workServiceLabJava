@@ -1,5 +1,7 @@
 package com.codeclan.example.workservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +23,30 @@ public class Employee {
     @Column(name = "employee_number")
     private int employeeNumber;
 
+    @JsonIgnoreProperties("employees")
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
+
 //    @Column(name = "projects")
 //    private List<Project> projects;
 
     public Employee(){}
 
-    public Employee(String firstName, String lastName, int employeeNumber) {
+    public Employee(String firstName, String lastName, int employeeNumber, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeNumber = employeeNumber;
+        this.department = department;
 //        this.projects = new ArrayList<>();
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public long getId() {
